@@ -17,12 +17,12 @@ const canvas = document.getElementById("wobbleCanvas");
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
-
-            const radius = 10;
+            const length = 125
+            const height = 60
 
             ctx.beginPath()
-            ctx.arc(x, y, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = "pink";
-            ctx.fill();
-            ctx.closePath();
+            ctx.rect(x - length/2, y - height/2, length, height);
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
         });
