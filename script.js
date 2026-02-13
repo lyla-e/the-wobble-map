@@ -9,3 +9,20 @@ function resizeCanvas() {
 
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
+
+const canvas = document.getElementById("wobbleCanvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.addEventListener("click", (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const radius = 10;
+
+            ctx.beginPath()
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "pink";
+            ctx.fill();
+            ctx.closePath();
+        });
