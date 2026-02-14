@@ -1,3 +1,6 @@
+const canvas = document.getElementById("wobbleCanvas");
+const ctx = canvas.getContext("2d");
+
 function resizeCanvas() {
     var canvas = document.getElementById("wobbleCanvas");
     canvas.width = window.innerWidth;
@@ -7,22 +10,42 @@ function resizeCanvas() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
-const canvas = document.getElementById("wobbleCanvas");
-        const ctx = canvas.getContext("2d");
+const shapes = []
+canvas.addEventListener("click", (event) => {
+    const space = canvas.getBoundingClientRect();
+    const x = event.clientX - space.left;
+    const y = event.clientY - space.top;
+    shapes.push({
+        x: x, 
+        y: y,
+        width: 125,
+        height: 60,
+        angle: Math.random() * Math.PI *2,
+        speed: 2
+    })
+})
 
-        canvas.addEventListener("click", (event) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            const length = 125
-            const height = 60
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.beginPath()
-            ctx.rect(x - length/2, y - height/2, length, height);
-            ctx.strokeStyle = "#000000";
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-        });
+    shapes.forEach(shape => {
+        shape.angle += (Math.random() - 0.5) * 0.2;
+        shape.x += Math.cos(shape.angle) * shape.speed;
+        shape.y += Math.sin(shape.angle) * shape.speed;
+
+        ctx.beginPath();
+        ctx.rect(
+            shape.x - shape.width / 2,
+            shape.y - shape.height / 2,
+            shape.width,
+            shape.height
+        )
+        ctx.stroke()
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
