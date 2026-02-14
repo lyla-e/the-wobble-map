@@ -8,7 +8,6 @@ function resizeCanvas() {
 }
 
 window.addEventListener("resize", resizeCanvas);
-let number = 0;
 
 const shapes = []
 canvas.addEventListener("click", (event) => {
