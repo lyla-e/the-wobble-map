@@ -11,6 +11,7 @@ function resizeCanvas() {
 }
 
 window.addEventListener("resize", resizeCanvas);
+let number = 0;
 
 const shapes = []
 canvas.addEventListener("click", (event) => {
@@ -23,7 +24,8 @@ canvas.addEventListener("click", (event) => {
         width: 125,
         height: 60,
         angle: Math.random() * Math.PI *2,
-        speed: 2
+        speed: 2,
+        number: shapes.length + 1
     })
 })
 
@@ -42,10 +44,17 @@ function animate() {
             shape.width,
             shape.height
         )
+
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "#000";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(shape.number, shape.x, shape.y);
         ctx.stroke()
     });
 
     requestAnimationFrame(animate);
 }
 
+resizeCanvas();
 animate();
