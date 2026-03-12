@@ -17,6 +17,9 @@ canvas.addEventListener("click", (event) => {
     shapes.push({
         x: x, 
         y: y,
+        originX: x,
+        originY: y,
+        radius: 30,
         width: 125,
         height: 60,
         angle: Math.random() * Math.PI *2,
@@ -32,6 +35,9 @@ function animate() {
         shape.angle += (Math.random() - 0.5) * 0.2;
         shape.x += Math.cos(shape.angle) * shape.speed;
         shape.y += Math.sin(shape.angle) * shape.speed;
+        dx = shape.x - shape.originX;
+        dy = shape.y - shape.originY;
+        distance = Math.sqrt(dx * dx + dy * dy); // bleh why are we doing math :(
 
         ctx.beginPath();
         ctx.rect(
