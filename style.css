@@ -5,4 +5,12 @@ canvas {
     image-rendering: pixelated;
 }
 
+h1{
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #1cc9d9;
+}
+
 body { margin: 0; overflow: hidden; }
