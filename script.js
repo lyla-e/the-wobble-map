@@ -116,6 +116,19 @@ function animate() {
                 resolveCollision(shape, shapes[j]);
             }
         }
+
+        // Draw personal wobble zone (subtle dashed box)
+        ctx.save();
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.12)";
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(
+            shape.originX - WOBBLE_RADIUS_X,
+            shape.originY - WOBBLE_RADIUS_Y,
+            WOBBLE_RADIUS_X * 2,
+            WOBBLE_RADIUS_Y * 2
+        );
+        ctx.restore();
+
         // Draw rectangle
         ctx.beginPath();
         ctx.rect(
